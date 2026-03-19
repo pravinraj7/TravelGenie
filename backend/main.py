@@ -22,6 +22,7 @@ app = FastAPI(title="TravelGenie API", version="2.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://travelgenie-nwzr.onrender.com",   # Production (Render)
         "http://localhost:5173",
         "http://localhost:5174",
         "http://localhost:3000",
