@@ -126,7 +126,7 @@ export default function DashboardPage() {
     console.log('[TravelGenie] /plan payload:', payload)
 
     try {
-      const { data } = await axios.post(`${API_BASE}/plan`, payload, { timeout: 15000 })
+      const { data } = await axios.post(`${API_BASE}/plan`, payload, { timeout: 40000 })
       setRecommendations(shapeRecommendations(data))
       setDataSource(data.source || data.mode || 'demo')
     } catch (err) {
