@@ -21,8 +21,14 @@ app = FastAPI(title="TravelGenie API", version="2.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
+    allow_origins=[
+        "https://travel-genie-git-main-pravin-rajs-projects-0b00a05d.vercel.app",
+        "https://travel-genie-5mr5hyhap-pravin-rajs-projects-0b00a05d.vercel.app",
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
