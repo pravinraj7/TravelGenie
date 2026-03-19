@@ -19,19 +19,26 @@ load_dotenv()
 
 app = FastAPI(title="TravelGenie API", version="2.0.0")
 
+origins = [
+    "https://travel-genie-git-main-pravin-rajs-projects-0b00a05d.vercel.app",
+    "https://travel-genie-5mr5hyhap-pravin-rajs-projects-0b00a05d.vercel.app",
+    "http://localhost:5173",   # local dev
+    "http://localhost:5174",
+    "http://127.0.0.1:5173",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://travel-genie-git-main-pravin-rajs-projects-0b00a05d.vercel.app",
-        "https://travel-genie-5mr5hyhap-pravin-rajs-projects-0b00a05d.vercel.app",
-        "http://localhost:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5173",
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ── Preflight handler (fixes OPTIONS CORS on some hosts) ──────────────────────
+@app.options("/{full_path:path}")
+async def options_handler(full_path: str):
+    return {"message": "OK"}
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 GOOGLE_API_KEY   = os.getenv("GOOGLE_PLACES_API_KEY", "").strip()
